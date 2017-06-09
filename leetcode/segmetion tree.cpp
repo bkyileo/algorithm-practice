@@ -7,13 +7,6 @@ struct SegTreeNode
     int val;
 }segTree[MAXNUM];//定义线段树
 
-/*
-功能：构建线段树
-root：当前线段树的根节点下标
-arr: 用来构造线段树的数组
-istart：数组的起始位置
-iend：数组的结束位置
-*/
 void build(int root, int arr[], int istart, int iend)
 {
     if(istart == iend)//叶子节点
@@ -21,19 +14,13 @@ void build(int root, int arr[], int istart, int iend)
     else
     {
         int mid = (istart + iend) / 2;
-        build(root*2+1, arr, istart, mid);//递归构造左子树
-        build(root*2+2, arr, mid+1, iend);//递归构造右子树
-        //根据左右子树根节点的值，更新当前根节点的值
+        build(root*2+1, arr, istart, mid);
+        build(root*2+2, arr, mid+1, iend);
         segTree[root].val = max(segTree[root*2+1].val, segTree[root*2+2].val);
     }
 }
 
-/*
-功能：线段树的区间查询
-root：当前线段树的根节点下标
-[nstart, nend]: 当前节点所表示的区间
-[qstart, qend]: 此次查询的区间
-*/
+
 int query(int root, int nstart, int nend, int qstart, int qend)
 {
     //查询区间和当前节点区间没有交集
